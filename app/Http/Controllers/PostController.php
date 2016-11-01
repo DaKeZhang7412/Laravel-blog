@@ -8,6 +8,8 @@ use blog\Http\Requests;
 
 use blog\Post;
 
+use Session;
+
 class PostController extends Controller
 {
     /**
@@ -17,7 +19,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //Create a variable and store all the blog posts in it from the database
+        $posts = Post::all();
+
+        //return a view and pass in the above variable
+        return view('posts.index')->withPosts($posts);
     }
 
     /**
@@ -52,6 +58,8 @@ class PostController extends Controller
 
         $post->save();
 
+        Session::flash('success', 'Your post has been successfully saved!');
+
         //redirect to another page
         return redirect()->route('posts.show', $post->id);
     }
@@ -64,7 +72,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+        return view('posts.show')->with('post', $post);
     }
 
     /**
