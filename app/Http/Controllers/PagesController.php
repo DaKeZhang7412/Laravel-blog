@@ -2,6 +2,8 @@
 
 namespace blog\Http\Controllers;
 
+use blog\Post;
+
 class PagesController extends Controller {
 
     public function getIndex(){
@@ -10,7 +12,9 @@ class PagesController extends Controller {
         # recieve from the model
         # compile or process data from model if needed
         # pass that data to view.
-        return view('pages.welcome');
+
+        $posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
+        return view('pages.welcome')->withPosts($posts);
     }
 
     public function getAbout(){

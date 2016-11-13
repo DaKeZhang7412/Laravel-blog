@@ -30,6 +30,11 @@
                     {!!  Html::linkRoute('posts.destroy', 'Delete', array($post->id), array('class' => 'btn btn-danger btn-block')) !!}
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-10">
+                    {{ Html::linkRoute('posts.index', '<<See All Posts', [], ['class' => 'btn btn-default btn-block btn-h1-spacing']) }}
+                </div>
+            </div>
         </div>
     </div>
 
