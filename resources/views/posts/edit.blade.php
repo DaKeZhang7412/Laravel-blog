@@ -9,6 +9,9 @@
         {{ Form::label('title', 'Title:') }}
         {{Form::text('title', null, ["class" => 'form-control input-lg']) }}
 
+        {{ Form::label('slug', 'Slug:', ["class" => 'form-spacing-top']) }}
+        {{Form::text('slug', null, ["class" => 'form-control form-spacing-top']) }}
+
         {{ Form::label('body', 'Body:', ['class' =>'form-spacing-top']) }}
         {{Form::textarea('body', null, ['class' => 'form-control'])}}
     </div>
@@ -16,6 +19,11 @@
     <div>
 
         <div class="well">
+            <dl class="dl-horizontal">
+                <dt>Url:</dt>
+                <dd><a href="{{ url('blog/'.$post->slug) }}"> {{url('blog/'.$post->slug)}}</a></dd>
+                {{-- <dd><a href="{{ route('blog.single', $post->slug) }}"> {{ route('blog.single', $post->slug) }}</a></dd> --}}
+            </dl>
             <dl class="col-md-6 dl-horizontal">
                 <dt>Create at:</dt>
                 <dd>{{ date('M j, Y h:i a', strtotime($post->created_at)) }}</dd>
@@ -28,12 +36,10 @@
 
             <div class="row">
                 <div class="col-sm-3">
-                    {!! Form::submit('Save', ['class' => 'btn btn-success btn-block'])!!}
+                    {!! Form::submit('Save Changes', ['class' => 'btn btn-success btn-block'])!!}
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
-                    {!! Form::close() !!}
+                    {!! Html::linkRoute('posts.show', 'Cancel', array($post->id), array('class' => 'btn btn-primary btn-block') ) !!}
                 </div>
             </div>
         </div>
