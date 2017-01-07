@@ -10,6 +10,8 @@
             <p>
                 {{ $post->body }}
             </p>
+            <hr>
+            <p>Category: {{ $post->category->name }}</p>
         </div>
     </div>
 

@@ -25,7 +25,11 @@ Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' =>'blog.index']);
 Route::get('contact', 'PagesController@getContact');
 Route::get('about', 'PagesController@getAbout');
 Route::get('/', 'PagesController@getIndex');
-Route::resource('posts', 'PostController');
+Route::resource('posts', 'PostController' );
+
+//categories
+Route::resource('categories', 'CategoryController', ['except' =>['create']]); // or can use only
+Route::resource('tags', 'TagController', ['except' =>['create']]);
 
 Auth::routes();
 
